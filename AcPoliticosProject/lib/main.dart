@@ -1,6 +1,8 @@
 import 'package:AcPoliticos/src/view/DepSearch.dart';
 import 'package:AcPoliticos/src/view/DepSumGastos.dart';
 import 'package:flutter/material.dart';
+import 'package:dropdownfield/dropdownfield.dart';
+import 'dart:async';
 
 void main() {
   runApp(MyApp());
@@ -98,5 +100,92 @@ class _HomeState extends State<Home> {
         items: widget.buildBottomNavBarItems,
       ),
     );
+  }
+}
+
+class ExampleForm extends StatefulWidget {
+  ExampleForm();
+
+  @override
+  _ExampleFormState createState() => _ExampleFormState();
+}
+
+class _ExampleFormState extends State<ExampleForm> {
+  // Create a global key that will uniquely identify the Form widget and allow
+  // us to validate the form
+  final _formKey = GlobalKey<FormState>();
+  Map<String, dynamic> formData;
+  List<String> cities = [
+    'Bangalore',
+    'Chennai',
+    'Chennay',
+    'New York',
+    'Mumbai',
+    'Delhi',
+    'Tokyo',
+  ];
+  List<String> countries = [
+    'INDIA',
+    'USA',
+    'JAPAN',
+  ];
+
+  _ExampleFormState() {
+    formData = {
+      'City': 'Bangalore',
+      'Country': 'INDIA',
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+        future: buildFutures(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            default:
+              if (snapshot.hasError) {
+                return Text(snapshot.error.toString());
+              } else {
+                if (snapshot.data != null)
+                  return Scaffold(
+                      body: Container(
+                    color: Colors.white,
+                    constraints: BoxConstraints.expand(),
+                    child: Form(
+                      key: _formKey,
+                      autovalidate: false,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            Divider(
+                                height: 10.0,
+                                color: Theme.of(context).primaryColor),
+                            DropDownField(
+                              value: formData['City'],
+                              icon: Icon(Icons.location_city),
+                              required: true,
+                              hintText: 'Choose a city',
+                              labelText: 'City *',
+                              items: cities,
+                              strict: false,
+                              setter: (dynamic newValue) {
+                                formData['City'] = newValue;
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ));
+                else
+                  return LinearProgressIndicator();
+              }
+          }
+        });
+  }
+
+  Future<bool> buildFutures() async {
+    return true;
   }
 }

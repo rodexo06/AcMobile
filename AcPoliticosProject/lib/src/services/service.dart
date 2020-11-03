@@ -36,8 +36,8 @@ class PortalTransparencia {
   }
 
   // PARTIDOS PRONTO
-  static Future fetchPartidos({int idLegislatura}) async{
-    final response = await http.get('https://dadosabertos.camara.leg.br/api/v2/partidos?idLegislatura=$idLegislatura&itens=100000&ordem=ASC&ordenarPor=sigla');
+  static Future fetchPartidos({int idLegislatura, int ano, int mes}) async{
+    final response = await http.get('https://dadosabertos.camara.leg.br/api/v2/partidos?dataInicio=$ano-$mes-01&idLegislatura=$idLegislatura&itens=10000&ordem=ASC&ordenarPor=sigla');
     if (response.statusCode == 200){
       var partidosJson = json.decode(response.body);
       // ignore: omit_local_variable_types

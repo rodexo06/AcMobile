@@ -1,21 +1,27 @@
-import 'dart:convert';
-
 class ResultUfs {
-  int id;
+  int idUf;
   String sigla;
   String nome;
 
   ResultUfs(
-    this.id,
+    this.idUf,
     this.sigla,
     this.nome,
   );
 
-  String toJson() => json.encode(toMap());
-
+  ResultUfs.fromJson(Map<String, dynamic> json) {
+    idUf = json['id'];
+    sigla = json['sigla'];
+    nome = json['nome'];
+  }
+  ResultUfs.fromJsonDb(Map<String, dynamic> json) {
+    idUf = json['id_uf'];
+    sigla = json['sigla'];
+    nome = json['nome_uf'];
+  }
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'uri': sigla,
-        'nome': nome,
+        'id_uf': idUf,
+        'sigla': sigla,
+        'nome_uf': nome,
       };
 }

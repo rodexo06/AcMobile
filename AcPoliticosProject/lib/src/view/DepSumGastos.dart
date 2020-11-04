@@ -1,4 +1,4 @@
-import 'package:AcPoliticos/src/model/Objetfodace.dart';
+import 'package:AcPoliticos/src/models/despesa_deputado.dart';
 import 'package:flutter/material.dart';
 
 class DepSumGastos extends StatefulWidget {
@@ -76,14 +76,7 @@ class _DepSumDataWidgetState extends State<DepSumDataWidget> {
       labelTotal = "5000";
 
   // List<Objetfodace> listSumDep = List<Objetfodace>();
-  List<Objetfodace> listSumDep = [
-    Objetfodace("Divulgação de pegar nosso dinehiro e enfiar no cu", "5000"),
-    Objetfodace("Começão de Puta ", "100000000"),
-    Objetfodace("Fazer Racahadinha", "1000000"),
-    Objetfodace("Divulgação de pegar nosso dinehiro e enfiar no cu", "5000"),
-    Objetfodace("Começão de Puta ", "100000000"),
-    Objetfodace("Fazer Racahadinha", "1000000")
-  ];
+  List<DespesasDeputado> listSumDep = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -213,7 +206,7 @@ class _DepSumDataWidgetState extends State<DepSumDataWidget> {
                                 width: size.width * 0.55,
                                 child: RichText(
                                   text: TextSpan(
-                                    text: listSumDep[index].string1,
+                                    text: listSumDep[index].tipoDespesa,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -223,7 +216,7 @@ class _DepSumDataWidgetState extends State<DepSumDataWidget> {
                               ),
                               Spacer(),
                               Text(
-                                "R\$: ${listSumDep[index].string2}",
+                                "R\$: ${listSumDep[index].valorDocumento}",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,

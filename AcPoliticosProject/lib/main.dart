@@ -1,3 +1,5 @@
+import 'package:AcPoliticos/src/view/DepDevs.dart';
+import 'package:AcPoliticos/src/view/DepHome.dart';
 import 'package:AcPoliticos/src/view/DepSearch.dart';
 import 'package:AcPoliticos/src/view/DepSumGastos.dart';
 import 'package:flutter/material.dart';
@@ -19,13 +21,19 @@ class MyApp extends StatelessWidget {
   }
 
   List<Widget> pages() {
-    return [DepSearch(), DepSumGastos()];
+    return [
+      DepHome(),
+      DepSearch(),
+      DepSumGastos(),
+      DepDevs(),
+    ];
   }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Home(
           pages: pages(), buildBottomNavBarItems: buildBottomNavBarItems()),
     );

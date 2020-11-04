@@ -1,13 +1,16 @@
+import 'package:AcPoliticos/src/controller/streamControl.dart';
 import 'package:flutter/material.dart';
 
 class ItemsList extends StatefulWidget {
-  final List<Map> items;
+  final List<String> items;
   final String filter;
+  final DeputadoBloc deputadoBloc;
 
   const ItemsList({
     Key key,
     this.items,
     this.filter,
+    this.deputadoBloc,
   }) : super(key: key);
 
   @override
@@ -27,12 +30,14 @@ class _ItemsListState extends State<ItemsList> {
       );
     }
 
-    List<Map> filteredList = List<Map>();
+    // The list after filter apply
+    List<String> filteredList = List<String>();
 
     // There is some filter?
     if (widget.filter.isNotEmpty) {
       for (dynamic item in widget.items) {
-        String name = item['nome'].toString().toLowerCase();
+        // Check if theres this filter in the current item
+        String name = item.toString().toLowerCase();
         if (name.contains(widget.filter.toLowerCase())) {
           filteredList.add(item);
         }
@@ -51,20 +56,18 @@ class _ItemsListState extends State<ItemsList> {
       );
     }
 
-    // Instancia model
-
     return ListView.builder(
-      shrinkWrap: true,
-      itemCount: filteredList.length,
-      itemBuilder: (BuildContext context, int i) {
-        Map item = filteredList[i];
-        return ListTile(
-            title: Text(item['nome']),
-            onTap: () {
-              // itemBo.getItem(item['pk_item']).then((Map i) {
-              // Adiciona dados do item a pagina
-            });
-      },
-    );
+        shrinkWrap: true,
+        itemCount: filteredList.length,
+        itemBuilder: (BuildContext context, int i) {
+          String item = filteredList[i];
+          return Container(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(item),
+            ),
+          );
+        });
   }
 }

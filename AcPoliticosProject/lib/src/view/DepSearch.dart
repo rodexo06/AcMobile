@@ -1,4 +1,4 @@
-import 'package:AcPoliticos/src/controller/streamControl.dart';
+import 'package:AcPoliticos/src/controller/DepBloc.dart';
 import 'package:AcPoliticos/src/models/legislatura.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +24,8 @@ class _DepSearchState extends State<DepSearch> {
       dropdownValueAno = "2020",
       dropdownValueMes = "10";
   String filterText = "";
-  List<String> listSaida = [
-    "Gustavo",
-    "Gustava",
-    "Gusta",
-    "Rafa",
-    "Fernando",
-  ];
+  List<dynamic> listSaida = List<dynamic>();
+
   var listAno = [for (var i = 2020; i >= 2015; i -= 1) i.toString()];
   var listMes = [for (var i = 12; i >= 1; i -= 1) i.toString()];
   Map<String, dynamic> formData;
@@ -410,10 +405,10 @@ class _DepSearchState extends State<DepSearch> {
                                     },
                                   ),
                                   Expanded(
-                                    child: StreamBuilder<List<String>>(
+                                    child: StreamBuilder<List<dynamic>>(
                                       stream: _deputadoBloc.deputadosSaida,
                                       builder: (BuildContext context,
-                                          AsyncSnapshot<List<String>>
+                                          AsyncSnapshot<List<dynamic>>
                                               snapshot) {
                                         if (snapshot.hasData) {
                                           if (snapshot.data.length == 0) {

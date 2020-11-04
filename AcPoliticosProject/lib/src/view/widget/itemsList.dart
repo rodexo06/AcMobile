@@ -1,8 +1,9 @@
-import 'package:AcPoliticos/src/controller/streamControl.dart';
+import 'package:AcPoliticos/src/controller/DepBloc.dart';
+import 'package:AcPoliticos/src/view/DepSumGastos.dart';
 import 'package:flutter/material.dart';
 
 class ItemsList extends StatefulWidget {
-  final List<String> items;
+  final List<dynamic> items;
   final String filter;
   final DeputadoBloc deputadoBloc;
 
@@ -31,13 +32,13 @@ class _ItemsListState extends State<ItemsList> {
     }
 
     // The list after filter apply
-    List<String> filteredList = List<String>();
+    List<dynamic> filteredList = List<dynamic>();
 
     // There is some filter?
     if (widget.filter.isNotEmpty) {
       for (dynamic item in widget.items) {
         // Check if theres this filter in the current item
-        String name = item.toString().toLowerCase();
+        String name = item.nome.toString().toLowerCase();
         if (name.contains(widget.filter.toLowerCase())) {
           filteredList.add(item);
         }
@@ -57,17 +58,28 @@ class _ItemsListState extends State<ItemsList> {
     }
 
     return ListView.builder(
-        shrinkWrap: true,
-        itemCount: filteredList.length,
-        itemBuilder: (BuildContext context, int i) {
-          String item = filteredList[i];
-          return Container(
-            height: 50,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(item),
+      shrinkWrap: true,
+      itemCount: filteredList.length,
+      itemBuilder: (BuildContext context, int i) {
+        String item = filteredList[i].nome;
+        return Material(
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DepSumGastos()),
+              );
+            },
+            child: Container(
+              height: 50,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(item),
+              ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

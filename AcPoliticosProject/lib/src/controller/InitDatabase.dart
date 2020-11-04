@@ -1,14 +1,19 @@
-import 'package:AcPoliticos/src/database/insert.dart';
+import 'package:AcPoliticos/src/database/deputadosDados.dart';
+import 'package:AcPoliticos/src/database/legislaturaDados.dart';
+import 'package:AcPoliticos/src/database/partidoDados.dart';
+import 'package:AcPoliticos/src/database/ufDados.dart';
 import 'package:AcPoliticos/src/models/legislatura.dart';
 import 'package:AcPoliticos/src/models/partido.dart';
 import 'package:AcPoliticos/src/models/result_deputado.dart';
 import 'package:AcPoliticos/src/models/ufs.dart';
-import 'package:AcPoliticos/src/services/service.dart';
 
 class InitDatabase {
-  var insert = Insert();
+  PartidoDados partidoDados = PartidoDados();
+  DeputadoDados deputadoDados = DeputadoDados();
+  UfDados ufDados = UfDados();
+  LegislaturaDados legislaturaDados = LegislaturaDados();
   Future<void> funcaoInit() async {
-    var verifica = await insert.verifica();
+    var verifica = await legislaturaDados.verifica();
     if (verifica) {
       return;
     }
@@ -17,34 +22,35 @@ class InitDatabase {
     List<Partido> listPartido = List<Partido>();
     List<ResultDeputado> listDeputado = List<ResultDeputado>();
     // Catch Legislatura
-    await PortalTransparencia.fetchLegislatura().then((value) => listLegis =
-        value
-            .where((element) => DateTime.parse(element.dataInicio)
-                .isAfter(DateTime(2014, 01, 01)))
-            .toList());
+    await legislaturaDados.fetchLegislatura().then((value) => listLegis = value
+        .where((element) =>
+            DateTime.parse(element.dataInicio).isAfter(DateTime(2014, 01, 01)))
+        .toList());
     // Catch Uf
-    await PortalTransparencia.fetchUf().then((value) => listUf = value);
+    await ufDados.fetchUf().then((value) => listUf = value);
     // Catch Partidos por Legislatura
     for (var i = 0; i < listLegis.length; i++) {
-      await PortalTransparencia.fetchPartidos(listLegis[i].id)
+      await partidoDados
+          .fetchPartidos(listLegis[i].id)
           .then((value) => listPartido..addAll(value));
     }
     // Catch Deputado por Legislatura
     for (var i = 0; i < listLegis.length; i++) {
-      await PortalTransparencia.fetchDeputados(listLegis[i].id)
+      await deputadoDados
+          .fetchDeputados(listLegis[i].id)
           .then((value) => listDeputado..addAll(value));
     }
     listLegis.forEach((element) async {
-      await insert.insertLegis(element);
+      await legislaturaDados.insertLegis(element);
     });
     listDeputado.forEach((element) async {
-      await insert.insertDeputado(element);
+      await deputadoDados.insertDeputado(element);
     });
     listUf.forEach((element) async {
-      await insert.insertUf(element);
+      await ufDados.insertUf(element);
     });
     listPartido.forEach((element) async {
-      await insert.insertPartido(element);
+      await partidoDados.insertPartido(element);
     });
     // var deputadosNorm = listDeputado.distinct((e) => e.siglaPartido).toList();
     // var IntermediateDepLes = listDeputado

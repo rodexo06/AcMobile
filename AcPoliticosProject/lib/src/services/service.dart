@@ -21,7 +21,6 @@ class PortalTransparencia {
     }
   }
 
-<<<<<<< HEAD
   // LEGISLATURA PRONTA
   static Future<List<Legislatura>> fetchLegislatura() async {
     final response = await http.get(
@@ -33,26 +32,6 @@ class PortalTransparencia {
           .toList();
     } else {
       throw Exception('Requisição inválida!');
-=======
-  // PARTIDOS PRONTO
-  static Future fetchPartidos({int idLegislatura, int ano, int mes}) async{
-    final response = await http.get('https://dadosabertos.camara.leg.br/api/v2/partidos?dataInicio=$ano-$mes-01&idLegislatura=$idLegislatura&itens=10000&ordem=ASC&ordenarPor=sigla');
-    if (response.statusCode == 200){
-      var partidosJson = json.decode(response.body);
-      // ignore: omit_local_variable_types
-      List<String> listaPartidos = [];
-      for(var u in partidosJson['dados']){
-        var partido = Partidos(u['id'], u['sigla'], u['nome'], u['uri']);
-        var sigla = u['sigla'];
-        var boolean = sigla.contains('*');
-        if(boolean == false){
-        listaPartidos.add(partido.sigla);
-        }
-      }
-      return listaPartidos;
-    }else{
-    throw Exception('Requisição inválida');
->>>>>>> d88b99105461cd0152e9c3fee75e5b7ffd2ac67a
     }
   }
 

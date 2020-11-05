@@ -19,7 +19,7 @@ class _DepDevsState extends State<DepDevs> {
           color: Color(0XFF004A2F),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 35),
+          padding: const EdgeInsets.only(top: 35),
           child: Container(
             child: Column(
               children: [
@@ -40,7 +40,7 @@ class _DepDevsState extends State<DepDevs> {
                         ))),
                 SizedBox(height: size.height * 0.01),
                 Text(
-                  "TRANSPARÊNCIA",
+                  "Grupo Astronomiaus",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -56,75 +56,154 @@ class _DepDevsState extends State<DepDevs> {
                   decoration: new BoxDecoration(
                       color: Color(0XFF013421),
                       borderRadius: BorderRadius.all(Radius.circular(25))),
-                  height: size.height * 0.55,
+                  height: size.height * 0.635,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: [
-                        ListTile(
-                          leading: CustomCircleImageWidget(
-                              width: 45,
-                              height: 45,
-                              caminhoImagem: "assets/Fortinho.jpeg"),
-                          dense: true,
-                          title: Text('Leonardo Andrade Fortes',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text('RA: 1901002',
-                              style: TextStyle(color: Colors.white)),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            "Cadê Meu Dinheiro",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        ListTile(
-                          leading: CustomCircleImageWidget(
-                              width: 45,
-                              height: 45,
-                              caminhoImagem: "assets/Leozinho.jpeg"),
-                          dense: true,
-                          title: Text('Leonardo de Lima Oliveira',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text('RA: 1900164',
-                              style: TextStyle(color: Colors.white)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, bottom: 5),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                CustomCircleImageWidget(
+                                    width: 70,
+                                    height: 70,
+                                    caminhoImagem: "assets/Fortinho.jpeg"),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Leonardo Andrade Fortes',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                    Text('RA: 1901002',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                        ListTile(
-                          leading: CustomCircleImageWidget(
-                              width: 45,
-                              height: 45,
-                              caminhoImagem: "assets/Rafinha.jpg"),
-                          dense: true,
-                          title: Text('Rafael Ferresira de Lima',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text('RA: 1901750',
-                              style: TextStyle(color: Colors.white)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                CustomCircleImageWidget(
+                                    width: 70,
+                                    height: 70,
+                                    caminhoImagem: "assets/Leozinho.jpeg"),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Leonardo de Lima Oliveira',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                    Text('RA: 1900164',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                        ListTile(
-                          leading: CustomCircleImageWidget(
-                              width: 45,
-                              height: 45,
-                              caminhoImagem: "assets/Charrinho.jpeg"),
-                          dense: true,
-                          title: Text('Thiago Charro Melo da Silva',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text('RA: 1901089',
-                              style: TextStyle(color: Colors.white)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                CustomCircleImageWidget(
+                                    width: 70,
+                                    height: 70,
+                                    caminhoImagem: "assets/Rafinha.jpg"),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Rafael Ferreira de Lima',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                    Text('RA: 1901750',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
-                        ListTile(
-                          leading: CustomCircleImageWidget(
-                              width: 45,
-                              height: 45,
-                              caminhoImagem: "assets/PereiraFunk.jpeg"),
-                          dense: true,
-                          title: Text('Thiago Pereira da Silva',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)),
-                          subtitle: Text('RA: 1900949',
-                              style: TextStyle(color: Colors.white)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                CustomCircleImageWidget(
+                                    width: 70,
+                                    height: 70,
+                                    caminhoImagem: "assets/Charrinho.jpeg"),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Thiago Charro Melo da Silva',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                    Text('RA: 1901089',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
+                          child: Container(
+                            child: Row(
+                              children: [
+                                CustomCircleImageWidget(
+                                    width: 70,
+                                    height: 70,
+                                    caminhoImagem: "assets/PereiraFunk.jpeg"),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Thiago Pereira da Silva',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold)),
+                                    Text('RA: 1900949',
+                                        style: TextStyle(color: Colors.white)),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

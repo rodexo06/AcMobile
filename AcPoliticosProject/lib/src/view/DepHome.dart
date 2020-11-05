@@ -48,7 +48,7 @@ class _DepHomeState extends State<DepHome> {
                 // Divider(color: Colors.grey, height: 10),
                 // SizedBox(height: size.height * 0.20),
                 Text(
-                  "Consulte a analise de gastos",
+                  "Consulte a análise de gastos",
                   style: TextStyle(color: Color(0XFF8F8F8F)),
                 ),
                 SizedBox(height: size.height * 0.003),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class ItemsList extends StatefulWidget {
   final List<dynamic> items;
+  final Map<String, dynamic> formData;
   final String filter;
   final DeputadoBloc deputadoBloc;
 
@@ -12,6 +13,7 @@ class ItemsList extends StatefulWidget {
     this.items,
     this.filter,
     this.deputadoBloc,
+    this.formData,
   }) : super(key: key);
 
   @override
@@ -65,9 +67,13 @@ class _ItemsListState extends State<ItemsList> {
         return Material(
           child: InkWell(
             onTap: () {
+              widget.formData['select'] = filteredList[i];
+
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => DepSumGastos()),
+                MaterialPageRoute(
+                    builder: (context) =>
+                        DepSumGastos(formData: widget.formData)),
               );
             },
             child: Container(

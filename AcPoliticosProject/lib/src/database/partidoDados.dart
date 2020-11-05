@@ -24,7 +24,7 @@ class PartidoDados {
     return maps.map<Partido>((json) => new Partido.fromJsonDb(json)).toList();
   }
 
-  static Future<List<Partido>> fetchPartidos(int idLegislatura) async {
+  Future<List<Partido>> fetchPartidos(int idLegislatura) async {
     final response = await http.get(
         '''https://dadosabertos.camara.leg.br/api/v2/partidos?idLegislatura=$idLegislatura&itens=100000&ordem=ASC&ordenarPor=sigla''');
     if (response.statusCode == 200) {

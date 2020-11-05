@@ -40,6 +40,7 @@ class ResultDeputado {
     urlFoto = json['url_foto'];
     email = json['email'];
   }
+
   Map<String, dynamic> toMap() => {
         'id_dep': idDeputado,
         'sigla_partido': siglaPartido,

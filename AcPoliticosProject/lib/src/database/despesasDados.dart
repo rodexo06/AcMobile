@@ -7,10 +7,10 @@ import 'databaseHelper.dart';
 class DespesaDados {
   final dbHelper = DatabaseHelper.instance;
 
-  Future<Map> fetchDespesa(
-      {int id, int idLegislatura, int ano, int mes}) async {
+  Future<List<DespesasDeputado>> fetchDespesa(
+      int id, String idLegislatura, String ano, String mes) async {
     final response = await http.get(
-        'https://dadosabertos.camara.leg.br/api/v2/deputados/$id/despesas?idLegislatura=$idLegislatura&ano=$ano&mes=$mes&itens=10000&ordem=ASC&ordenarPor=ano');
+        'https://dadosabertos.camara.leg.br/api/v2/deputados/$id/despesas?idLegislatura=$idLegislatura&ano=$ano&mes=$mes&itens=10000&ordem=ASC&ordenarPor=tipoDespesa');
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body)['dados'];
       return jsonData

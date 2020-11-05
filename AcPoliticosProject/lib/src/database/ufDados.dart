@@ -26,7 +26,7 @@ class UfDados {
         .toList();
   }
 
-  static Future<List<ResultUfs>> fetchUf() async {
+  Future<List<ResultUfs>> fetchUf() async {
     final response = await http
         .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
     if (response.statusCode == 200) {

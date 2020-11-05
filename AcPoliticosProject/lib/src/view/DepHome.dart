@@ -26,38 +26,27 @@ class _DepHomeState extends State<DepHome> {
           color: Color(0XFF004A2F),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+          padding: const EdgeInsets.symmetric(horizontal: 40),
           child: Container(
             child: Column(
               children: [
-                // Logo do Grupo
                 Container(
-                    decoration: new BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: Colors.white, width: 3),
-                        borderRadius: BorderRadius.all(Radius.circular(60.0))),
-                    height: 100,
-                    width: 100,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(60),
-                        child: Image.asset(
-                          "assets/logoMiaus.jpeg",
-                        ))),
-                SizedBox(height: size.height * 0.01),
-                Text(
-                  "TRANSPARÊNCIA",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold),
+                  height: 400,
+                  width: 400,
+                  child: Image.asset("assets/logoCadeMeuDinheiro.png"),
                 ),
-                SizedBox(height: size.height * 0.005),
-                Text("Copyright 2020",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold)),
-                SizedBox(height: size.height * 0.01),
-                Divider(color: Colors.grey, height: 10),
-                SizedBox(height: size.height * 0.20),
+                // SizedBox(height: size.height * 0.03),
+                // Text(
+                //   "Cadê Meu Dinheiro?",
+                //   style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 28,
+                //       fontWeight: FontWeight.w600),
+                // ),
+
+                // SizedBox(height: size.height * 0.01),
+                // Divider(color: Colors.grey, height: 10),
+                // SizedBox(height: size.height * 0.20),
                 Text(
                   "Consulte a analise de gastos",
                   style: TextStyle(color: Color(0XFF8F8F8F)),
@@ -67,7 +56,7 @@ class _DepHomeState extends State<DepHome> {
                   "por deputado",
                   style: TextStyle(color: Color(0XFF8F8F8F)),
                 ),
-                SizedBox(height: size.height * 0.02),
+                SizedBox(height: size.height * 0.05),
                 FutureBuilder(
                     future: initDatabase.funcaoInit(),
                     builder:
@@ -98,8 +87,8 @@ class _DepHomeState extends State<DepHome> {
                                         Border.all(color: Color(0XFF707070)),
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(5.0))),
-                                height: size.height * 0.06,
-                                width: size.width * 0.4,
+                                height: size.height * 0.08,
+                                width: size.width * 0.6,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Center(

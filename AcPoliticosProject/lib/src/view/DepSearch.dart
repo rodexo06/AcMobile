@@ -81,7 +81,7 @@ class _DepSearchState extends State<DepSearch> {
       'legislativo': "56",
       'ano': "2020",
       'mes': "10",
-      'deputado': "Escolha um",
+      'select': "Escolha um",
       'typeSearch': 'Deputado'
     };
   }
@@ -412,15 +412,19 @@ class _DepSearchState extends State<DepSearch> {
                                               snapshot) {
                                         if (snapshot.hasData) {
                                           if (snapshot.data.length == 0) {
-                                            return Text('No notes');
+                                            return Center(
+                                                child: Text('Sem Dados',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20)));
                                           }
                                           // listSaida.clear();
                                           listSaida = snapshot.data;
                                           return ItemsList(
-                                            items: snapshot.data,
-                                            filter: filterText,
-                                            deputadoBloc: this._deputadoBloc,
-                                          );
+                                              items: snapshot.data,
+                                              filter: filterText,
+                                              deputadoBloc: this._deputadoBloc,
+                                              formData: formData);
                                         }
                                         return Center(
                                           child: CircularProgressIndicator(),

@@ -31,7 +31,7 @@ class LegislaturaDados {
         .toList();
   }
 
-  static Future<List<Legislatura>> fetchLegislatura() async {
+  Future<List<Legislatura>> fetchLegislatura() async {
     final response = await http.get(
         'https://dadosabertos.camara.leg.br/api/v2/legislaturas?ordem=DESC');
     if (response.statusCode == 200) {

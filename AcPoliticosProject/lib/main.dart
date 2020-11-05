@@ -1,7 +1,5 @@
 import 'package:AcPoliticos/src/view/DepDevs.dart';
 import 'package:AcPoliticos/src/view/DepHome.dart';
-import 'package:AcPoliticos/src/view/DepSearch.dart';
-import 'package:AcPoliticos/src/view/DepSumGastos.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'dart:async';
@@ -14,7 +12,7 @@ class MyApp extends StatelessWidget {
   List<BottomNavigationBarItem> buildBottomNavBarItems() {
     return [
       BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
-      BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Busca")),
+      // BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Busca")),
       BottomNavigationBarItem(
           icon: Icon(Icons.accessibility), title: Text("Deputado")),
     ];
@@ -23,8 +21,6 @@ class MyApp extends StatelessWidget {
   List<Widget> pages() {
     return [
       DepHome(),
-      DepSearch(),
-      DepSumGastos(),
       DepDevs(),
     ];
   }

@@ -27,6 +27,28 @@ class DeputadoDados {
         .toList();
   }
 
+  Future<List<ResultDeputado>> getAllDeputadosbyUf(
+      String idLegis, String siglaUf) async {
+    final Database db = await dbHelper.database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM deputado where id_legislatura = $idLegis and sigla_uf = '$siglaUf'");
+    return maps
+        .map<ResultDeputado>((json) => new ResultDeputado.fromJsonDb(json))
+        .toList();
+  }
+
+  Future<List<ResultDeputado>> getAllDeputadosbyPartido(
+    String idLegis,
+    String siglaPartido,
+  ) async {
+    final Database db = await dbHelper.database;
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+        "SELECT * FROM deputado where id_legislatura =  $idLegis and sigla_partido = '$siglaPartido'");
+    return maps
+        .map<ResultDeputado>((json) => new ResultDeputado.fromJsonDb(json))
+        .toList();
+  }
+
   Future<List<ResultDeputado>> getAllDeputados() async {
     final Database db = await dbHelper.database;
     final List<Map<String, dynamic>> maps = await db.query('deputado');

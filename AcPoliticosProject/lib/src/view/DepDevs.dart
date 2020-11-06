@@ -97,6 +97,7 @@ class _DepDevsState extends State<DepDevs> {
                             ),
                           ),
                         ),
+                Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 5),
@@ -124,6 +125,7 @@ class _DepDevsState extends State<DepDevs> {
                             ),
                           ),
                         ),
+                Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 5),
@@ -151,6 +153,7 @@ class _DepDevsState extends State<DepDevs> {
                             ),
                           ),
                         ),
+                Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 5),
@@ -178,6 +181,7 @@ class _DepDevsState extends State<DepDevs> {
                             ),
                           ),
                         ),
+                Spacer(),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 5),
@@ -205,6 +209,7 @@ class _DepDevsState extends State<DepDevs> {
                             ),
                           ),
                         ),
+                Spacer(),
                       ],
                     ),
                   ),

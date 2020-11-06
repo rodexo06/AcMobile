@@ -111,7 +111,9 @@ class _DepHomeState extends State<DepHome> {
                               borderRadius:
                                   BorderRadius.circular(isLoading ? 40 : 10),
                             ),
-                            width: isLoading ? 50 : size.width * 0.55,
+                            width: isLoading 
+                                ? size.height * 0.07
+                                : size.width * 0.55,
                             height: size.height * 0.07,
                             alignment: Alignment.center,
                             child: AnimatedCrossFade(

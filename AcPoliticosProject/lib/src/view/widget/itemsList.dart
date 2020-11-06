@@ -63,7 +63,17 @@ class _ItemsListState extends State<ItemsList> {
       shrinkWrap: true,
       itemCount: filteredList.length,
       itemBuilder: (BuildContext context, int i) {
-        String item = filteredList[i].nome;
+        String item = "";
+        if (widget.formData['typeSearch'] == "Deputado") {
+          item = filteredList[i].nome;
+        }
+        if (widget.formData['typeSearch'] == "UF") {
+          item = filteredList[i].nome;
+        }
+        if (widget.formData['typeSearch'] == "Partido") {
+          item = filteredList[i].sigla;
+        }
+
         return Material(
           child: InkWell(
             onTap: () {

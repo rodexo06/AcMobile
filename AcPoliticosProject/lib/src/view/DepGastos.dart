@@ -1,6 +1,7 @@
 import 'package:AcPoliticos/src/models/despesa_deputado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:intl/intl.dart';
 
 class DepGastos extends StatefulWidget {
   final Map<String, dynamic> formData;
@@ -12,40 +13,47 @@ class DepGastos extends StatefulWidget {
 }
 
 class _DepGastosState extends State<DepGastos> {
-  Widget loadHeader(
-      Map<String, dynamic> formData, List<DespesasDeputado> despesas) {
+  final formatCurrency = new NumberFormat.currency(locale: "pt_BR", symbol: "");
+
+  Widget loadHeader(Map<String, dynamic> formData,
+      List<DespesasDeputado> despesas, Size size) {
     double total = 0;
     despesas.forEach((e) => total += e.valorDocumento);
     if (formData['typeSearch'] == "Deputado") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Nome: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Partido: ${formData['select'].siglaPartido}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "UF: ${formData['select'].siglaUf}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: "Nome: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    "Partido: ${formData['select'].siglaPartido}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "UF: ${formData['select'].siglaUf}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -65,12 +73,14 @@ class _DepGastosState extends State<DepGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${total.toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(total)}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -80,27 +90,32 @@ class _DepGastosState extends State<DepGastos> {
     }
     if (formData['typeSearch'] == "UF") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "UF: ${formData['select'].sigla}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Estado: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "UF: ${formData['select'].sigla}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Estado: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -120,12 +135,14 @@ class _DepGastosState extends State<DepGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${total.toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(total)}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -135,27 +152,32 @@ class _DepGastosState extends State<DepGastos> {
     }
     if (formData['typeSearch'] == "Partido") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Sigla: ${formData['select'].sigla}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Nome: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Sigla: ${formData['select'].sigla}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Nome: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -175,12 +197,14 @@ class _DepGastosState extends State<DepGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${total.toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(total)}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -222,7 +246,7 @@ class _DepGastosState extends State<DepGastos> {
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               child: Container(
                                 width: size.width,
-                                height: size.height * 0.1,
+                                height: size.height * 0.13,
                                 decoration: new BoxDecoration(
                                     color: Color(0XFF004A2F),
                                     borderRadius: BorderRadius.only(
@@ -232,7 +256,7 @@ class _DepGastosState extends State<DepGastos> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 4),
                                   child: loadHeader(
-                                      widget.formData, widget.despesas),
+                                      widget.formData, widget.despesas, size),
                                 ),
                               ),
                             ),
@@ -283,6 +307,8 @@ class DepGastoListWidget extends StatefulWidget {
 }
 
 class _DepGastoListWidgetState extends State<DepGastoListWidget> {
+  final formatCurrency = new NumberFormat.currency(locale: "pt_BR", symbol: "");
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -334,10 +360,10 @@ class _DepGastoListWidgetState extends State<DepGastoListWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                              "Valor Doc: ${widget.despesas[i].valorDocumento.toStringAsFixed(2)}"),
+                              "Valor Doc: ${formatCurrency.format(widget.despesas[i].valorDocumento)}"),
                           Spacer(),
                           Text(
-                              "Valor Liquído: ${widget.despesas[i].valorLiquido.toStringAsFixed(2)}"),
+                              "Valor Liquído: ${formatCurrency.format(widget.despesas[i].valorLiquido)}"),
                         ],
                       ),
                       Divider(color: Colors.black),

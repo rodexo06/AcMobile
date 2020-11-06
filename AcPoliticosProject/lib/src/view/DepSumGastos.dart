@@ -1,8 +1,10 @@
 import 'package:AcPoliticos/src/controller/GastosBloc.dart';
 import 'package:AcPoliticos/src/models/despesa_deputado.dart';
 import 'package:AcPoliticos/src/view/DepGastos.dart';
+import 'package:AcPoliticos/src/view/TypewriterTween.dart';
 import 'package:AcPoliticos/src/view/widget/SwitchMesWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DepSumGastos extends StatefulWidget {
   final Map<String, dynamic> formData;
@@ -11,14 +13,23 @@ class DepSumGastos extends StatefulWidget {
   _DepSumGastosState createState() => _DepSumGastosState();
 }
 
-class _DepSumGastosState extends State<DepSumGastos> {
+class _DepSumGastosState extends State<DepSumGastos>
+    with SingleTickerProviderStateMixin {
+  static const Duration _duration = Duration(seconds: 2);
+  static const String message = "...";
+  AnimationController controller;
+  Animation<String> animation;
   GastosBloc gastosBloc;
   Widget headerWidget;
   String mes;
   List<RadioModel> mesList = new List<RadioModel>();
+  final formatCurrency = new NumberFormat.currency(locale: "pt_BR", symbol: "");
   @override
   void initState() {
     super.initState();
+    controller = AnimationController(vsync: this, duration: _duration)
+      ..repeat();
+    animation = TypewriterTween(end: message).animate(controller);
     double tam = 50;
     mesList.add(new RadioModel(false, tam, tam, Color(0XFF1DA838), Colors.white,
         '1', Color(0XFF004A2F)));
@@ -46,37 +57,48 @@ class _DepSumGastosState extends State<DepSumGastos> {
         '12', Color(0XFF004A2F)));
   }
 
-  Widget loadHeader(Map<String, dynamic> formData) {
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  Widget loadHeader(Map<String, dynamic> formData, Size size) {
     if (formData['typeSearch'] == "Deputado") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Nome: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Partido: ${formData['select'].siglaPartido}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "UF: ${formData['select'].siglaUf}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      text: "Nome: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    "Partido: ${formData['select'].siglaPartido}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "UF: ${formData['select'].siglaUf}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -96,12 +118,14 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${formData['total'].toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(formData['total'])}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -111,27 +135,32 @@ class _DepSumGastosState extends State<DepSumGastos> {
     }
     if (formData['typeSearch'] == "UF") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "UF: ${formData['select'].sigla}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Estado: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "UF: ${formData['select'].sigla}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Estado: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -151,12 +180,14 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${formData['total'].toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(formData['total'])}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -166,27 +197,32 @@ class _DepSumGastosState extends State<DepSumGastos> {
     }
     if (formData['typeSearch'] == "Partido") {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Sigla: ${formData['select'].sigla}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  "Nome: ${formData['select'].nome}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            Container(
+              width: size.width * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Sigla: ${formData['select'].sigla}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      text: "Nome: ${formData['select'].nome}",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Spacer(),
             Column(
@@ -206,12 +242,14 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  "Total: ${formData['total'].toStringAsFixed(2)}",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                RichText(
+                  text: TextSpan(
+                    text: "Total: ${formatCurrency.format(formData['total'])}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -302,6 +340,35 @@ class _DepSumGastosState extends State<DepSumGastos> {
                           stream: gastosBloc.despesaSaida,
                           builder: (BuildContext context,
                               AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CircularProgressIndicator(
+                                        valueColor:
+                                            AlwaysStoppedAnimation<Color>(
+                                                Colors.white)),
+                                    SizedBox(height: 20),
+                                    Container(
+                                      child: AnimatedBuilder(
+                                        animation: animation,
+                                        builder: (context, child) {
+                                          return Text(
+                                              'Carregando dados${animation.value}',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontFamily: 'SpecialElite'));
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
                             if (snapshot.hasData) {
                               if (snapshot.data.length == 0) {
                                 return Center(
@@ -326,7 +393,7 @@ class _DepSumGastosState extends State<DepSumGastos> {
                                           vertical: 10),
                                       child: Container(
                                         width: size.width,
-                                        height: size.height * 0.1,
+                                        height: size.height * 0.13,
                                         decoration: new BoxDecoration(
                                             color: Color(0XFF004A2F),
                                             borderRadius: BorderRadius.only(
@@ -338,7 +405,8 @@ class _DepSumGastosState extends State<DepSumGastos> {
                                         child: Padding(
                                           padding:
                                               const EdgeInsets.only(top: 4),
-                                          child: loadHeader(widget.formData),
+                                          child:
+                                              loadHeader(widget.formData, size),
                                         ),
                                       ),
                                     ),
@@ -351,7 +419,16 @@ class _DepSumGastosState extends State<DepSumGastos> {
                                   ]);
                             }
                             return Center(
-                              child: CircularProgressIndicator(),
+                              child: Column(
+                                children: [
+                                  CircularProgressIndicator(),
+                                  Text(
+                                    "Carregando Dados...",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  )
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -368,8 +445,6 @@ class _DepSumGastosState extends State<DepSumGastos> {
   }
 }
 
-// fazer um widget generico, que ele vai ser defionido la em cim no future builçder
-
 class DepSumDataWidget extends StatefulWidget {
   final Map<String, dynamic> formData;
   final Map<String, dynamic> despesas;
@@ -382,7 +457,8 @@ class DepSumDataWidget extends StatefulWidget {
 }
 
 class _DepSumDataWidgetState extends State<DepSumDataWidget> {
-  // List<Objetfodace> listSumDep = List<Objetfodace>();
+  final formatCurrency = new NumberFormat.currency(locale: "pt_BR", symbol: "");
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -427,7 +503,7 @@ class _DepSumDataWidgetState extends State<DepSumDataWidget> {
                           ),
                           Spacer(),
                           Text(
-                            "R\$: ${despesasSum.toStringAsFixed(2)}",
+                            "R\$: ${formatCurrency.format(despesasSum)}",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 14,

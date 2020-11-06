@@ -39,6 +39,7 @@ class DeputadoBloc {
     }
     if (formData['typeSearch'] == "UF") {
       saida = await ufDados.getAllUfs();
+      var a = 0;
     }
     if (formData['typeSearch'] == "Partido") {
       saida = await partidoDados.getAllPartidos();

@@ -97,7 +97,7 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${formData['total'].toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -152,7 +152,7 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${formData['total'].toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -207,7 +207,7 @@ class _DepSumGastosState extends State<DepSumGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${formData['total'].toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -240,7 +240,8 @@ class _DepSumGastosState extends State<DepSumGastos> {
                 // height: size.height * 0.10,
                 color: Color(0xFF013421),
                 child: Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    padding:
+                        const EdgeInsets.only(left: 15, right: 15, top: 15),
                     child: Container(
                       height: 180,
                       child: Column(
@@ -309,7 +310,14 @@ class _DepSumGastosState extends State<DepSumGastos> {
                                             color: Colors.white,
                                             fontSize: 20)));
                               }
+                              double total = 0;
                               var keys = snapshot.data.keys.toList();
+                              keys.forEach((key) {
+                                var listDepesas = snapshot.data[key];
+                                listDepesas
+                                    .forEach((e) => total += e.valorDocumento);
+                              });
+                              widget.formData['total'] = total;
                               return Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -334,29 +342,6 @@ class _DepSumGastosState extends State<DepSumGastos> {
                                         ),
                                       ),
                                     ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.symmetric(
-                                    //       horizontal: 15, vertical: 7.5),
-                                    //   child: Row(
-                                    //     mainAxisAlignment:
-                                    //         MainAxisAlignment.end,
-                                    //     crossAxisAlignment:
-                                    //         CrossAxisAlignment.center,
-                                    //     children: [
-                                    //       Text("Ordernar Por:",
-                                    //           style: TextStyle(
-                                    //               color: Colors.white)),
-                                    //       SizedBox(width: 5),
-                                    //       Container(
-                                    //         height: size.height * 0.03,
-                                    //         width: size.width * 0.225,
-                                    //         decoration: BoxDecoration(
-                                    //             border: Border.all(
-                                    //                 color: Color(0XFF707070))),
-                                    //       )
-                                    //     ],
-                                    //   ),
-                                    // ),
                                     Expanded(
                                       child: DepSumDataWidget(
                                           despesas: snapshot.data,
@@ -462,28 +447,3 @@ class _DepSumDataWidgetState extends State<DepSumDataWidget> {
     );
   }
 }
-// child: Center(
-//                               child: RichText(
-//                                 text: TextSpan(
-//                                   text: 'Tabela comparativa em ',
-//                                   style: TextStyle(
-//                                       color: Colors.white,
-//                                       fontSize: 18,
-//                                       fontWeight: FontWeight.bold),
-//                                   children: <TextSpan>[
-//                                     TextSpan(
-//                                         text: '${widget.formData['ano']}',
-//                                         style: TextStyle(
-//                                             color: Color(0XFF707070),
-//                                             fontWeight: FontWeight.bold)),
-//                                     TextSpan(text: ', na Legislatura '),
-//                                     TextSpan(
-//                                         text:
-//                                             '${widget.formData['legislatura']}',
-//                                         style: TextStyle(
-//                                             color: Color(0XFF707070),
-//                                             fontWeight: FontWeight.bold)),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),

@@ -125,7 +125,7 @@ class _DepSearchState extends State<DepSearch> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                              "Conheça as verbas e recursos a que um deputado tem direito para o exercício parlamentar",
+                              "Conheça as verbas e recursos aos quais um deputado ele consumiu em seu exercício parlamentar",
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14)),

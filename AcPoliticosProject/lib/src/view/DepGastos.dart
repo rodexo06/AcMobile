@@ -12,7 +12,10 @@ class DepGastos extends StatefulWidget {
 }
 
 class _DepGastosState extends State<DepGastos> {
-  Widget loadHeader(Map<String, dynamic> formData) {
+  Widget loadHeader(
+      Map<String, dynamic> formData, List<DespesasDeputado> despesas) {
+    double total = 0;
+    despesas.forEach((e) => total += e.valorDocumento);
     if (formData['typeSearch'] == "Deputado") {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -63,7 +66,7 @@ class _DepGastosState extends State<DepGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${total.toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -118,7 +121,7 @@ class _DepGastosState extends State<DepGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${total.toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -173,7 +176,7 @@ class _DepGastosState extends State<DepGastos> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "Total: ",
+                  "Total: ${total.toStringAsFixed(2)}",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -201,7 +204,7 @@ class _DepGastosState extends State<DepGastos> {
           ),
           Column(children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 27),
               child: Container(
                 decoration: new BoxDecoration(
                     color: Color(0xFF013421),
@@ -228,7 +231,8 @@ class _DepGastosState extends State<DepGastos> {
                                     )),
                                 child: Padding(
                                   padding: const EdgeInsets.only(top: 4),
-                                  child: loadHeader(widget.formData),
+                                  child: loadHeader(
+                                      widget.formData, widget.despesas),
                                 ),
                               ),
                             ),
@@ -239,9 +243,6 @@ class _DepGastosState extends State<DepGastos> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text("Ordernar Por:",
-                                      style: TextStyle(color: Colors.white)),
-                                  SizedBox(width: 5),
                                   Container(
                                     height: size.height * 0.03,
                                     width: size.width * 0.225,
@@ -336,7 +337,7 @@ class _DepGastoListWidgetState extends State<DepGastoListWidget> {
                               "Valor Doc: ${widget.despesas[i].valorDocumento.toStringAsFixed(2)}"),
                           Spacer(),
                           Text(
-                              "Valor Liquido: ${widget.despesas[i].valorLiquido.toStringAsFixed(2)}"),
+                              "Valor Liquído: ${widget.despesas[i].valorLiquido.toStringAsFixed(2)}"),
                         ],
                       ),
                       Divider(color: Colors.black),

@@ -1,37 +1,24 @@
-import 'package:AcPoliticos/src/view/DepDevs.dart';
-import 'package:AcPoliticos/src/view/DepHome.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'dart:async';
+
+import 'src/view/SplashWidget.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  List<BottomNavigationBarItem> buildBottomNavBarItems() {
-    return [
-      BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
-      // BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Busca")),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.accessibility), title: Text("Deputado")),
-    ];
-  }
-
-  List<Widget> pages() {
-    return [
-      DepHome(),
-      DepDevs(),
-    ];
-  }
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(
-          pages: pages(), buildBottomNavBarItems: buildBottomNavBarItems()),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: Splash(),
     );
   }
 }

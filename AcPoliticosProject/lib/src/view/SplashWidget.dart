@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
       BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
       // BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("Busca")),
       BottomNavigationBarItem(
-          icon: Icon(Icons.accessibility), title: Text("Deputado")),
+          icon: Icon(Icons.accessibility), title: Text("Devs")),
     ];
   }
 

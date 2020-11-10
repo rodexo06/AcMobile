@@ -12,7 +12,7 @@ class DepHome extends StatefulWidget {
 
 class _DepHomeState extends State<DepHome> {
   InitDatabase initDatabase = InitDatabase();
-  bool isActive;
+  bool isActive = false;
   bool isLoading = false;
 
   _onTap() {
@@ -111,7 +111,7 @@ class _DepHomeState extends State<DepHome> {
                               borderRadius:
                                   BorderRadius.circular(isLoading ? 40 : 10),
                             ),
-                            width: isLoading 
+                            width: isLoading
                                 ? size.height * 0.07
                                 : size.width * 0.55,
                             height: size.height * 0.07,

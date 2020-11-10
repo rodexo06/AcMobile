@@ -260,23 +260,6 @@ class _DepGastosState extends State<DepGastos> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 7.5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: size.height * 0.03,
-                                    width: size.width * 0.225,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Color(0XFF707070))),
-                                  )
-                                ],
-                              ),
-                            ),
                             Expanded(
                               child: DepGastoListWidget(
                                   despesas: widget.despesas,

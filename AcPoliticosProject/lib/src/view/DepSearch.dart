@@ -101,15 +101,9 @@ class _DepSearchState extends State<DepSearch> {
             child: Column(
               children: [
                 Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: size.height * 0.10,
-                        color: Color(0xFF013421),
-                        //#013421
-                      )
-                    ],
-                  ),
+                  height: size.height * 0.10,
+                  color: Color(0xFF013421),
+                  //#013421
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 15),
